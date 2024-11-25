@@ -2,6 +2,7 @@ import express from "express";
 import { fileURLToPath } from "url";
 import path from "path";
 import { getLlama, LlamaChatSession } from "node-llama-cpp";
+import ngrok from "ngrok";
 
 const app = express();
 
@@ -31,7 +32,7 @@ async function loadAllModels() {
         "Phi-3.5.Q4_K_M.gguf",
         "gemma2.Q4_K_M.gguf",
         "mistral.Q4_K_M.gguf",
-        "mistral.Q4_K_M.gguf",
+        "Quran-Tafsir-Gpt2-163M-F16.gguf",
         "llama-3.2.Q4_K_M.gguf"
     ];
 
@@ -69,19 +70,24 @@ app.post("/api/chat", async (req, res) => {
 
     try {
         const responses = [];
-        
+
         // Inference secara berurutan, satu model per satu
         for (const [index, session] of models.entries()) {
             console.log(`Starting inference for model ${index + 1}`);
             console.time(`Model ${index + 1} Inference Time`);
 
+            const startTime = Date.now(); // Start time
             const response = await session.prompt(inputText, {
                 maxTokens: 128,
             });
+            const endTime = Date.now(); // End time
+            const inferenceTime = (endTime - startTime) / 1000; // Convert to seconds
 
             console.timeEnd(`Model ${index + 1} Inference Time`); // Log time taken for this model
-            console.log(`Response from model ${index + 1}:`, response); // Print the response of each model
-            responses.push(response); // Menyimpan hasil inference untuk setiap model
+            console.log(`Response from model ${index + 1}:`, response);
+
+            // Tambahkan waktu inferensi ke response
+            responses.push(`${response.trim()} (Inference Time: ${inferenceTime}s)`);
         }
 
         // Return responses dari semua model
@@ -93,6 +99,10 @@ app.post("/api/chat", async (req, res) => {
 
 // Start the server
 const port = 3000;
-app.listen(port, () => {
+app.listen(port, async () => {
     console.log(`Server is running on http://localhost:${port}`);
+    
+    // Start Ngrok and expose port 3000
+    const ngrokUrl = await ngrok.connect(port);
+    console.log(`Ngrok tunnel is running at ${ngrokUrl}`);
 });
