@@ -7,15 +7,8 @@ import cors from "cors";
 
 const app = express();
 
-// Configure CORS
-const corsOptions = {
-    origin: "https://nandaarya.github.io", // Ganti dengan URL GitHub Pages Anda
-    methods: ["GET", "POST"], // Metode yang diizinkan
-    allowedHeaders: ["Content-Type"], // Header yang diizinkan
-};
-
-// Gunakan middleware CORS
-app.use(cors(corsOptions));
+// Izinkan semua origin (CORS terbuka)
+app.use(cors());
 
 app.use(express.json()); // Middleware to parse JSON body
 
