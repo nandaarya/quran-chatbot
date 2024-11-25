@@ -3,8 +3,19 @@ import { fileURLToPath } from "url";
 import path from "path";
 import { getLlama, LlamaChatSession } from "node-llama-cpp";
 import ngrok from "ngrok";
+import cors from "cors";
 
 const app = express();
+
+// Configure CORS
+const corsOptions = {
+    origin: "https://nandaarya.github.io", // Ganti dengan URL GitHub Pages Anda
+    methods: ["GET", "POST"], // Metode yang diizinkan
+    allowedHeaders: ["Content-Type"], // Header yang diizinkan
+};
+
+// Gunakan middleware CORS
+app.use(cors(corsOptions));
 
 app.use(express.json()); // Middleware to parse JSON body
 
