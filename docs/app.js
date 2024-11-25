@@ -17,7 +17,7 @@ document.getElementById('chatForm').addEventListener('submit', async (e) => {
 
     try {
         // Send the instruction to the backend (server)
-        const response = await fetch('https://0d0b-112-215-237-113.ngrok-free.app/api/chat', {
+        const response = await fetch('https://b9eb-112-215-237-113.ngrok-free.app/api/chat', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
