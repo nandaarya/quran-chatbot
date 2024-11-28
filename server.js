@@ -36,7 +36,7 @@ async function loadAllModels() {
         "Phi-3.5.Q4_K_M.gguf",
         "gemma2.Q4_K_M.gguf",
         "mistral.Q4_K_M.gguf",
-        "Quran-Tafsir-Gpt2-163M-F16.gguf",
+        "QuranTafsir-Gpt2-163M-F16.gguf",
         "llama-3.2.Q4_K_M.gguf"
     ];
 
