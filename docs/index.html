@@ -3,48 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quran Chatbot</title>
+    <title>Chatbot Terjemahan dan Tafsir Al-Qur'an</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>Quran Chatbot</h1>
-        <form id="chatForm">
-            <label for="instruction">Enter Instruction:</label>
-            <textarea id="instruction" name="instruction" rows="4" cols="50"></textarea>
-            <button type="submit">Send</button>
-        </form>
-        
-        <!-- AI Responses Container -->
+        <!-- Instruction Section -->
+        <div id="instructionContainer">
+            <h1>Chatbot Terjemahan dan Tafsir Al-Qur'an</h1>
+            <form id="chatForm">
+                <label for="instruction">Enter Instruction:</label>
+                <textarea id="instruction" name="instruction" rows="4"></textarea>
+                <button type="submit">Cari</button>
+            </form>
+        </div>
+
+        <!-- AI Responses Section -->
         <div id="responseContainer">
-            <h2>AI Responses</h2>
-            
             <!-- Model 1 Response -->
-            <div id="model1Response">
+            <div class="response-box" id="model1Response">
                 <strong>Model Phi 3.5 Response:</strong>
                 <p>Waiting for input...</p>
             </div>
             
             <!-- Model 2 Response -->
-            <div id="model2Response">
+            <div class="response-box" id="model2Response">
                 <strong>Model Gemma 2 Response:</strong>
                 <p>Waiting for input...</p>
             </div>
 
             <!-- Model 3 Response -->
-            <div id="model3Response">
-                <strong>Model Mistral v0.3 (7B) Response:</strong>
+            <div class="response-box" id="model3Response">
+                <strong>Model Mistral v0.3 Response:</strong>
                 <p>Waiting for input...</p>
             </div>
 
             <!-- Model 4 Response -->
-            <div id="model4Response">
+            <div class="response-box" id="model4Response">
                 <strong>Model GPT 2 Response:</strong>
                 <p>Waiting for input...</p>
             </div>
 
             <!-- Model 5 Response -->
-            <div id="model5Response">
+            <div class="response-box" id="model5Response">
                 <strong>Model Llama 3.2 Response:</strong>
                 <p>Waiting for input...</p>
             </div>
