@@ -7,7 +7,12 @@ document.getElementById('chatForm').addEventListener('submit', async (e) => {
         document.getElementById('model2Response'),
         document.getElementById('model3Response'),
         document.getElementById('model4Response'),
-        document.getElementById('model5Response')
+        document.getElementById('model5Response'),
+        document.getElementById('model6Response'),
+        document.getElementById('model7Response'),
+        document.getElementById('model8Response'),
+        document.getElementById('model9Response'),
+        document.getElementById('model10Response')
     ];
 
     // Cek apakah instruksi tidak kosong
