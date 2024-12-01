@@ -55,7 +55,7 @@ document.getElementById('chatForm').addEventListener('submit', async (e) => {
         console.error("Error:", error);
         responseContainers.forEach(container => {
             container.querySelector('p').textContent = "An error occurred, please try again.";
-            container.querySelector('.inference-time').textContent = "0";
+            container.querySelector('.inference-time').textContent = "waiting inference result...";
         });
     }
 });
