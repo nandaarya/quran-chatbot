@@ -101,3 +101,24 @@ button:hover {
     font-size: 1em;
     color: #333;
 }
+
+.inference-time {
+    position: absolute;
+    bottom: 10px;
+    right: 15px;
+    font-size: 0.9em;
+    color: #555;
+    font-style: italic;
+}
+.response-box {
+    position: relative; /* Set posisi relatif untuk menggunakan elemen absolut di dalamnya */
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 15px;
+    flex: 1;
+    min-width: 200px;
+    min-height: 300px;
+    text-align: left;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+}

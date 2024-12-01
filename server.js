@@ -78,25 +78,29 @@ app.post("/api/chat", async (req, res) => {
         // Inference secara berurutan, satu model per satu
         for (const [index, session] of models.entries()) {
             console.log(`Starting inference for model ${index + 1}`);
-            console.time(`Model ${index + 1} Inference Time`);
-
             const startTime = Date.now(); // Start time
+
             const response = await session.prompt(inputText, {
                 maxTokens: 128,
             });
+
             const endTime = Date.now(); // End time
-            const inferenceTime = (endTime - startTime) / 1000; // Convert to seconds
+            const inferenceTime = endTime - startTime; // Time in milliseconds
 
-            console.timeEnd(`Model ${index + 1} Inference Time`); // Log time taken for this model
             console.log(`Response from model ${index + 1}:`, response);
+            console.log(`Inference Time for model ${index + 1}: ${inferenceTime} ms`);
 
-            // Tambahkan waktu inferensi ke response
-            responses.push(`${response.trim()} (Inference Time: ${inferenceTime}s)`);
+            // Tambahkan objek dengan response dan inferenceTime ke array responses
+            responses.push({
+                response: response.trim(),
+                inferenceTime: `${inferenceTime} ms`
+            });
         }
 
         // Return responses dari semua model
         res.json({ responses });
     } catch (error) {
+        console.error("Error during chat processing:", error);
         res.status(500).json({ error: "An error occurred while generating the response." });
     }
 });
@@ -107,6 +111,10 @@ app.listen(port, async () => {
     console.log(`Server is running on http://localhost:${port}`);
     
     // Start Ngrok and expose port 3000
-    const ngrokUrl = await ngrok.connect(port);
-    console.log(`Ngrok tunnel is running at ${ngrokUrl}`);
+    try {
+        const ngrokUrl = await ngrok.connect(port);
+        console.log(`Ngrok tunnel is running at ${ngrokUrl}`);
+    } catch (error) {
+        console.error("Error starting Ngrok:", error);
+    }
 });

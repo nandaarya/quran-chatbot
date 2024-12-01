@@ -1,7 +1,7 @@
 document.getElementById('chatForm').addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const instruction = document.getElementById('instruction').value;
+    const instruction = document.getElementById('instruction').value.trim();
     const responseContainers = [
         document.getElementById('model1Response'),
         document.getElementById('model2Response'),
@@ -10,14 +10,21 @@ document.getElementById('chatForm').addEventListener('submit', async (e) => {
         document.getElementById('model5Response')
     ];
 
-    // Display loading message while waiting for response
+    // Cek apakah instruksi tidak kosong
+    if (!instruction) {
+        alert("Silakan masukkan instruksi.");
+        return;
+    }
+
+    // Tampilkan pesan loading
     responseContainers.forEach(container => {
         container.querySelector('p').textContent = "Generating response...";
+        container.querySelector('.inference-time').textContent = "0 ms";
     });
 
     try {
-        // Send the instruction to the backend (server)
-        const response = await fetch('https://29ad-112-215-237-99.ngrok-free.app/api/chat', {
+        // Kirim instruksi ke backend (server)
+        const response = await fetch('/api/chat', { // Gunakan relative URL
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -25,19 +32,30 @@ document.getElementById('chatForm').addEventListener('submit', async (e) => {
             body: JSON.stringify({ instruction })
         });
 
-        // Get the AI response and update the UI
+        if (!response.ok) {
+            throw new Error(`Server error: ${response.status}`);
+        }
+
         const data = await response.json();
 
-        // Display responses from each model
-        data.responses.forEach((modelResponse, index) => {
-            if (responseContainers[index]) {
-                responseContainers[index].querySelector('p').textContent = modelResponse;
-            }
-        });
+        // Pastikan data.responses adalah array dan memiliki panjang yang sesuai
+        if (Array.isArray(data.responses) && data.responses.length === responseContainers.length) {
+            // Tampilkan respons dan inference time di setiap response box
+            data.responses.forEach((modelResponse, index) => {
+                const container = responseContainers[index];
+                if (container) {
+                    container.querySelector('p').textContent = modelResponse.response;
+                    container.querySelector('.inference-time').textContent = `Inference Time: ${modelResponse.inferenceTime}`;
+                }
+            });
+        } else {
+            throw new Error("Invalid response structure from server.");
+        }
     } catch (error) {
         console.error("Error:", error);
         responseContainers.forEach(container => {
             container.querySelector('p').textContent = "An error occurred, please try again.";
+            container.querySelector('.inference-time').textContent = "0 ms";
         });
     }
 });
