@@ -19,7 +19,7 @@ document.getElementById('chatForm').addEventListener('submit', async (e) => {
     // Tampilkan pesan loading
     responseContainers.forEach(container => {
         container.querySelector('p').textContent = "Generating response...";
-        container.querySelector('.inference-time').textContent = "0 ms";
+        container.querySelector('.inference-time').textContent = "0";
     });
 
     try {
@@ -45,7 +45,7 @@ document.getElementById('chatForm').addEventListener('submit', async (e) => {
                 const container = responseContainers[index];
                 if (container) {
                     container.querySelector('p').textContent = modelResponse.response;
-                    container.querySelector('.inference-time').textContent = `Inference Time: ${modelResponse.inferenceTime}`;
+                    container.querySelector('.inference-time').textContent = `${modelResponse.inferenceTime} detik`;
                 }
             });
         } else {
@@ -55,7 +55,7 @@ document.getElementById('chatForm').addEventListener('submit', async (e) => {
         console.error("Error:", error);
         responseContainers.forEach(container => {
             container.querySelector('p').textContent = "An error occurred, please try again.";
-            container.querySelector('.inference-time').textContent = "0 ms";
+            container.querySelector('.inference-time').textContent = "0";
         });
     }
 });
