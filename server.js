@@ -88,7 +88,7 @@ app.post("/api/chat", async (req, res) => {
             const inferenceTime = ((endTime - startTime) / 1000).toFixed(3); // Time in seconds with 3 decimals
 
             console.log(`Response from model ${index + 1}:`, response);
-            console.log(`Inference Time for model ${index + 1}: ${inferenceTime} seconds`);
+            console.log(`Inference Time for model ${index + 1}: ${inferenceTime} detik`);
 
             // Tambahkan objek dengan response dan inferenceTime ke array responses
             responses.push({
