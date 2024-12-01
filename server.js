@@ -93,7 +93,7 @@ app.post("/api/chat", async (req, res) => {
             // Tambahkan objek dengan response dan inferenceTime ke array responses
             responses.push({
                 response: response.trim(),
-                inferenceTime: `${inferenceTime} seconds`
+                inferenceTime: `${inferenceTime} detik`
             });
         }
 
