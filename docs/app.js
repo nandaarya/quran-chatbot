@@ -19,7 +19,7 @@ document.getElementById('chatForm').addEventListener('submit', async (e) => {
     // Tampilkan pesan loading
     responseContainers.forEach(container => {
         container.querySelector('p').textContent = "Generating response...";
-        container.querySelector('.inference-time').textContent = "0";
+        container.querySelector('.inference-time').textContent = "process...";
     });
 
     try {
@@ -45,7 +45,7 @@ document.getElementById('chatForm').addEventListener('submit', async (e) => {
                 const container = responseContainers[index];
                 if (container) {
                     container.querySelector('p').textContent = modelResponse.response;
-                    container.querySelector('.inference-time').textContent = `${modelResponse.inferenceTime} detik`;
+                    container.querySelector('.inference-time').textContent = `${modelResponse.inferenceTime}`;
                 }
             });
         } else {
