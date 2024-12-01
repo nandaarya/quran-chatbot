@@ -33,6 +33,11 @@ async function loadModel(modelName) {
 // Function to load all models one by one
 async function loadAllModels() {
     const modelNames = [
+        "pretrained-Gpt2-163M-F16.gguf",
+        "pretrained-Gpt2-163M-F16.gguf",
+        "pretrained-Gpt2-163M-F16.gguf",
+        "pretrained-Gpt2-163M-F16.gguf",
+        "pretrained-Gpt2-163M-F16.gguf",
         "Phi-3.5.Q4_K_M.gguf",
         "gemma2.Q4_K_M.gguf",
         "mistral.Q4_K_M.gguf",
