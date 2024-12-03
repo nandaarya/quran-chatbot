@@ -29,7 +29,7 @@ document.getElementById('chatForm').addEventListener('submit', async (e) => {
 
     try {
         // Kirim instruksi ke backend (server)
-        const response = await fetch('https://ea9d-203-78-117-111.ngrok-free.app/api/chat', { // Gunakan relative URL
+        const response = await fetch('https://501a-203-78-117-111.ngrok-free.app/api/chat', { // Gunakan relative URL
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
