@@ -42,9 +42,13 @@ document.getElementById('chatForm').addEventListener('submit', async (e) => {
     };
 
     try {
-        // Kirim instruksi ke backend untuk setiap model
-        const responses = await Promise.all(Object.keys(modelPaths).map(async (modelKey) => {
-            const response = await fetch(`https://81c1-112-215-173-243.ngrok-free.app/api/chat/${modelKey}`, {
+        // Proses secara bergantian, satu per satu
+        for (let i = 0; i < Object.keys(modelPaths).length; i++) {
+            const modelKey = `model${i + 1}`;
+            const responseContainer = responseContainers[i];
+
+            // Kirim instruksi ke backend untuk model saat ini
+            const response = await fetch(`https://c7fe-112-215-173-243.ngrok-free.app/api/chat/${modelKey}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -56,21 +60,13 @@ document.getElementById('chatForm').addEventListener('submit', async (e) => {
                 throw new Error(`Server error: ${response.status}`);
             }
 
-            return await response.json();
-        }));
+            const modelResponse = await response.json();
 
-        // Pastikan data.responses adalah array dan memiliki panjang yang sesuai
-        if (responses.length === responseContainers.length) {
             // Tampilkan respons dan inference time di setiap response box
-            responses.forEach((modelResponse, index) => {
-                const container = responseContainers[index];
-                if (container) {
-                    container.querySelector('p').textContent = modelResponse.response;
-                    container.querySelector('.inference-time').textContent = `${modelResponse.inferenceTime}`;
-                }
-            });
-        } else {
-            throw new Error("Invalid response structure from server.");
+            if (responseContainer) {
+                responseContainer.querySelector('p').textContent = modelResponse.response;
+                responseContainer.querySelector('.inference-time').textContent = `${modelResponse.inferenceTime}`;
+            }
         }
     } catch (error) {
         console.error("Error:", error);
