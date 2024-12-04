@@ -7,7 +7,16 @@ import ngrok from "ngrok";
 
 const app = express();
 
-app.use(cors());
+const corsOptions = {
+    origin: "https://nandaarya.github.io", // Ganti dengan URL frontend Anda
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Metode yang diizinkan
+    allowedHeaders: ["Content-Type", "Authorization"], // Header yang diizinkan
+    credentials: true, // Jika Anda menggunakan cookies
+};
+
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
+
 app.use(express.json());
 
 // Define __dirname equivalent in ES module
