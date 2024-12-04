@@ -39,7 +39,7 @@ document.getElementById('chatForm').addEventListener('submit', async (e) => {
         model8: "mistral.Q4_K_M.gguf",
         model9: "GPT2-QuranTafsir-Model-163M-F16.gguf",
         model10: "llama-3.2.Q4_K_M.gguf",
-        };
+    };
 
     try {
         // Kirim instruksi ke backend untuk setiap model
