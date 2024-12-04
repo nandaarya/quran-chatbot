@@ -28,27 +28,25 @@ document.getElementById('chatForm').addEventListener('submit', async (e) => {
     });
 
     try {
-        // Kirim instruksi ke backend untuk setiap model
-        const responses = await Promise.all(Object.keys(modelPaths).map(async (modelKey) => {
-            const response = await fetch(`https://2e3b-140-213-219-27.ngrok-free.app/api/chat/${modelKey}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ instruction })
-            });
+        // Kirim instruksi ke backend (server)
+        const response = await fetch('https://2e3b-140-213-219-27.ngrok-free.app/api/chat', { // Gunakan relative URL
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ instruction })
+        });
 
-            if (!response.ok) {
-                throw new Error(`Server error: ${response.status}`);
-            }
+        if (!response.ok) {
+            throw new Error(`Server error: ${response.status}`);
+        }
 
-            return await response.json();
-        }));
+        const data = await response.json();
 
         // Pastikan data.responses adalah array dan memiliki panjang yang sesuai
-        if (responses.length === responseContainers.length) {
+        if (Array.isArray(data.responses) && data.responses.length === responseContainers.length) {
             // Tampilkan respons dan inference time di setiap response box
-            responses.forEach((modelResponse, index) => {
+            data.responses.forEach((modelResponse, index) => {
                 const container = responseContainers[index];
                 if (container) {
                     container.querySelector('p').textContent = modelResponse.response;
