@@ -68,7 +68,7 @@ function createChatHandler(modelKey) {
             console.log(`Starting inference for model: ${modelKey}`);
             const startTime = Date.now();
 
-            const response = await modelSession.prompt(inputText, {
+            let response = await modelSession.prompt(inputText, {
                 maxTokens: 128,
             });
 
