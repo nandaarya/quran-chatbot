@@ -31,7 +31,7 @@ document.getElementById('chatForm').addEventListener('submit', async (e) => {
     const modelPaths = {
         model1: "pretrained-Phi-3.5.Q4_K_M.gguf",
         model2: "pretrained-Gemma2.Q4_K_M.gguf",
-        model3: "pretrained-Mistral.Q4_K_M.gguf",
+        model3: "pretrained-llama-3.2.Q4_K_M.gguf",
         model4: "pretrained-Gpt2-163M-F16.gguf",
         model5: "pretrained-llama-3.2.Q4_K_M.gguf",
         model6: "Phi-3.5.Q4_K_M.gguf",
