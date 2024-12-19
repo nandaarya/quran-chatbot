@@ -48,7 +48,7 @@ document.getElementById('chatForm').addEventListener('submit', async (e) => {
             const responseContainer = responseContainers[i];
 
             // Kirim instruksi ke backend untuk model saat ini
-            const response = await fetch(`https://7140-203-78-117-201.ngrok-free.app/api/chat/${modelKey}`, {
+            const response = await fetch(`https://b463-140-213-44-60.ngrok-free.app/api/chat/${modelKey}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
